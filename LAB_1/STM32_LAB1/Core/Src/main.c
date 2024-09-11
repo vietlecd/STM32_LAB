@@ -97,23 +97,30 @@ int main(void)
 	  if(color == 'N')
 	  {
 		  HAL_GPIO_TogglePin(Led_yellow_GPIO_Port, Led_yellow_Pin);
-		  color = 'Y';
+		  HAL_GPIO_TogglePin(Led_green_GPIO_Port, Led_green_Pin);
+		  color = 'R';
 	  }
 	  else if(color == 'R')
 	  {
-		  HAL_GPIO_TogglePin(Led_yellow_GPIO_Port, Led_yellow_Pin);
+		  HAL_Delay(5000);
 		  HAL_GPIO_TogglePin(Led_red_GPIO_Port, Led_red_Pin);
-		  color = 'Y';
+		  HAL_GPIO_TogglePin(Led_green_GPIO_Port, Led_green_Pin);
+		  color = 'G';
 	  }
 	  else if (color == 'Y')
 	  {
-		  HAL_GPIO_TogglePin(Led_red_GPIO_Port, Led_red_Pin);
+		  HAL_Delay(2000);
 		  HAL_GPIO_TogglePin(Led_yellow_GPIO_Port, Led_yellow_Pin);
+		  HAL_GPIO_TogglePin(Led_red_GPIO_Port, Led_red_Pin);
 		  color = 'R';
 	  }
-	  HAL_Delay(2000);
-	  //should have use switch case :)
-
+	  else if (color == 'G')
+	  {
+		  HAL_Delay(3000);
+		  HAL_GPIO_TogglePin(Led_green_GPIO_Port, Led_green_Pin);
+		  HAL_GPIO_TogglePin(Led_yellow_GPIO_Port, Led_yellow_Pin);
+		  color = 'Y';
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -169,10 +176,10 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, Led_red_Pin|Led_yellow_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, Led_red_Pin|Led_yellow_Pin|Led_green_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : Led_red_Pin Led_yellow_Pin */
-  GPIO_InitStruct.Pin = Led_red_Pin|Led_yellow_Pin;
+  /*Configure GPIO pins : Led_red_Pin Led_yellow_Pin Led_green_Pin */
+  GPIO_InitStruct.Pin = Led_red_Pin|Led_yellow_Pin|Led_green_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
