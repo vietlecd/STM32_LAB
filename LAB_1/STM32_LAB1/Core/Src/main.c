@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2024 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -32,6 +31,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -48,7 +48,23 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+//Ex7
 /* USER CODE BEGIN PFP */
+void clearAllClock()
+{
+	HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED5_GPIO_Port, LED5_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED6_GPIO_Port, LED6_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED7_GPIO_Port, LED7_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED8_GPIO_Port, LED8_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED9_GPIO_Port, LED9_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED10_GPIO_Port, LED10_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED11_GPIO_Port, LED11_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED12_GPIO_Port, LED12_Pin, GPIO_PIN_SET);
+}
 
 /* USER CODE END PFP */
 
@@ -91,28 +107,11 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  char color = 'N';
+
+  clearAllClock();
+
   while (1)
   {
-	  if(color == 'N')
-	  {
-		  HAL_GPIO_TogglePin(Led_yellow_GPIO_Port, Led_yellow_Pin);
-		  color = 'Y';
-	  }
-	  else if(color == 'R')
-	  {
-		  HAL_GPIO_TogglePin(Led_yellow_GPIO_Port, Led_yellow_Pin);
-		  HAL_GPIO_TogglePin(Led_red_GPIO_Port, Led_red_Pin);
-		  color = 'Y';
-	  }
-	  else if (color == 'Y')
-	  {
-		  HAL_GPIO_TogglePin(Led_red_GPIO_Port, Led_red_Pin);
-		  HAL_GPIO_TogglePin(Led_yellow_GPIO_Port, Led_yellow_Pin);
-		  color = 'R';
-	  }
-	  HAL_Delay(2000);
-	  //should have use switch case :)
 
     /* USER CODE END WHILE */
 
@@ -169,10 +168,16 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, Led_red_Pin|Led_yellow_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED1_Pin|LED2_Pin|LED3_Pin|LED4_Pin
+                          |LED5_Pin|LED6_Pin|LED7_Pin|LED8_Pin
+                          |LED9_Pin|LED10_Pin|LED11_Pin|LED12_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : Led_red_Pin Led_yellow_Pin */
-  GPIO_InitStruct.Pin = Led_red_Pin|Led_yellow_Pin;
+  /*Configure GPIO pins : LED1_Pin LED2_Pin LED3_Pin LED4_Pin
+                           LED5_Pin LED6_Pin LED7_Pin LED8_Pin
+                           LED9_Pin LED10_Pin LED11_Pin LED12_Pin */
+  GPIO_InitStruct.Pin = LED1_Pin|LED2_Pin|LED3_Pin|LED4_Pin
+                          |LED5_Pin|LED6_Pin|LED7_Pin|LED8_Pin
+                          |LED9_Pin|LED10_Pin|LED11_Pin|LED12_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
