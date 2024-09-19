@@ -201,30 +201,30 @@ int main(void)
   {
 	  //ex10
 	  clearNumberOnClock(min / 5);
+	  //update kim giây, tạo hiệu ứng nhấp nháy
+	  if (sec % 5 == 0) setNumberOnClock(sec / 5) ;
+			  else clearNumberOnClock(sec / 5);
 
-	  	  if (sec % 5 == 0) setNumberOnClock(sec / 5) ;
-	  			  else clearNumberOnClock(sec / 5);
+	  setNumberOnClock(min / 5);
+	  setNumberOnClock(hour);
 
-	  	  setNumberOnClock(min / 5);
-	  	  setNumberOnClock(hour);
+	  sec++;
 
-	  	  sec++;
+	  if (sec >= 60){
+		  sec = 0;
+		  min++;
+		  if (min >= 60){
+			  min = 0;
+			  clearNumberOnClock(hour);
+			  hour++;
+			  setNumberOnClock(hour);
+			  if (hour >= 12) {
+				  hour = 0;
+			  }
+		  }
+	  }
 
-	  	  if (sec >= 60){
-	  		  sec = 0;
-	  		  min++;
-	  		  if (min >= 60){
-	  			  min = 0;
-	  			  clearNumberOnClock(hour);
-	  			  hour++;
-	  			  setNumberOnClock(hour);
-	  			  if (hour >= 12) {
-	  				  hour = 0;
-	  			  }
-	  		  }
-	  	  }
-
-	  	  HAL_Delay(100);
+	  HAL_Delay(100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
